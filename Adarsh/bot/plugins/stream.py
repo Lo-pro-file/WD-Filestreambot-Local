@@ -139,15 +139,24 @@ async def channel_receive_handler(bot, broadcast):
             text=f"**Channel Name:** `{broadcast.chat.title}`\n**CHANNEL ID:** `{broadcast.chat.id}`\n**Rᴇǫᴜᴇsᴛ ᴜʀʟ:** {stream_link}",
             quote=True
         )
-        await bot.edit_message_reply_markup(
+        if broadcast.caption:
+             XCaption = broadcast.caption   
+        else:
+              None 
+        XCaption = XCaption.replace("@Pulikesi_MemeZ - ", "")
+        XCaption = XCaption.replace("@Pulikesi_MemeZ ", "")
+        XCaption = XCaption.replace("HEVC", "#HEVC")
+        XCaption = XCaption.rsplit('.', 1)[0]
+        if XCaption.startswith('Sample') or XCaption in 'from':
+            XCaption = XCaption.replace("Sample video. 30s from", "#SampleVideo")
+            XCaption = XCaption.replace("30s from", "#SampleVideo")
+            XCaption = f"{XCaption}\n\n📥 JOIN : @Pulikesi_MemeZ"
+        else:
+            XCaption = f"{XCaption}\n\nFast Download Link 👇\n{online_link}\n\n📥 JOIN : @Pulikesi_MemeZ"
+        await bot.edit_message_caption(
             chat_id=broadcast.chat.id,
             message_id=broadcast.id,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [InlineKeyboardButton("🖥STREAM ", url=stream_link),
-                     InlineKeyboardButton('Dᴏᴡɴʟᴏᴀᴅ📥', url=online_link)] 
-                ]
-            )
+            caption=f'<b>**{XCaption}**</b>'
         )
     except FloodWait as w:
         print(f"Sleeping for {str(w.x)}s")
