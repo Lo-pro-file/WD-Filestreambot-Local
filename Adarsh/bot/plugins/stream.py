@@ -1,4 +1,7 @@
 #(c) Adarsh-Goel
+import aiohttp
+import requests
+
 import os
 import asyncio
 from asyncio import TimeoutError
@@ -18,6 +21,22 @@ db = Database(Var.DATABASE_URL, Var.name)
 MY_PASS = os.environ.get("MY_PASS", None)
 pass_dict = {}
 pass_db = Database(Var.DATABASE_URL, "ag_passwords")
+
+async def get_shortlink(link):
+   longurl = link
+   try:
+      api = "d19cb8275a7951db2bb2f4ea6593be33cf78d585"
+      SHORTENER = 'du-link.in'
+      params = {'api': api, 'url': longurl}
+      duli= f'https://dulink.in/api'
+      get_url = requests.get(duli,params)
+      get_url =  get_url.json()['shortenedUrl']
+      print(get_url)
+      return get_url
+      
+   except Exception as err:
+       print(err)
+       pass
 
 
 @StreamBot.on_message((filters.regex("login🔑") | filters.command("login")) , group=4)
@@ -135,8 +154,11 @@ async def channel_receive_handler(bot, broadcast):
         log_msg = await broadcast.forward(chat_id=Var.BIN_CHANNEL)
         stream_link = f"{Var.URL}watch/{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
         online_link = f"{Var.URL}{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
+        link = online_link
+        online_link = await get_shortlink(link) 
+        
         await log_msg.reply_text(
-            text=f"**Channel Name:** `{broadcast.chat.title}`\n**CHANNEL ID:** `{broadcast.chat.id}`\n**Rᴇǫᴜᴇsᴛ ᴜʀʟ:** {stream_link}",
+            text=f"**Channel Name:** `{broadcast.chat.title}`\n**CHANNEL ID:** `{broadcast.chat.id}`\n**Rᴇǫᴜᴇsᴛ ᴜʀʟ:** {link}",
             quote=True
         )
         if broadcast.caption:
@@ -147,7 +169,7 @@ async def channel_receive_handler(bot, broadcast):
         XCaption = XCaption.replace("@Pulikesi_MemeZ ", "")
         XCaption = XCaption.replace("HEVC", "#HEVC")
         XCaption = XCaption.rsplit('.', 1)[0]
-        if XCaption.startswith('Sample') or XCaption in 'from':
+        if XCaption.startswith('Sample') or 'from' in XCaption:
             XCaption = XCaption.replace("Sample video. 30s from", "#SampleVideo")
             XCaption = XCaption.replace("30s from", "#SampleVideo")
             XCaption = f"{XCaption}\n\n📥 JOIN : @Pulikesi_MemeZ"
