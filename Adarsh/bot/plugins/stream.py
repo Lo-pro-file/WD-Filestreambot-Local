@@ -165,16 +165,17 @@ async def channel_receive_handler(bot, broadcast):
              XCaption = broadcast.caption   
         else:
               None 
-        XCaption = XCaption.replace("@Pulikesi_MemeZ - ", "")
-        XCaption = XCaption.replace("@Pulikesi_MemeZ ", "")
+        XCaption = XCaption.replace("@Pulikesi_Links - ", "")
+        XCaption = XCaption.replace("@Pulikesi_Links ", "")
         XCaption = XCaption.replace("HEVC", "#HEVC")
         XCaption = XCaption.rsplit('.', 1)[0]
         if XCaption.startswith('Sample') or 'from' in XCaption:
             XCaption = XCaption.replace("Sample video. 30s from", "#SampleVideo")
+            XCaption = XCaption.rsplit('of', 1)[0]
             XCaption = XCaption.replace("30s from", "#SampleVideo")
-            XCaption = f"{XCaption}\n\n📥 JOIN : @Pulikesi_MemeZ"
+            XCaption = f"{XCaption}\n\n📥 JOIN : @Pulikesi_Links"
         else:
-            XCaption = f"{XCaption}\n\nFast Download Link 👇\n{online_link}\n\n📥 JOIN : @Pulikesi_MemeZ"
+            XCaption = f"{XCaption}\n\nFast Download Link 👇\n{online_link}\n\n📥 JOIN : @Pulikesi_Links"
         await bot.edit_message_caption(
             chat_id=broadcast.chat.id,
             message_id=broadcast.id,
