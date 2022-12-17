@@ -25,10 +25,10 @@ pass_db = Database(Var.DATABASE_URL, "ag_passwords")
 async def get_shortlink(link):
    longurl = link
    try:
-      api = "d19cb8275a7951db2bb2f4ea6593be33cf78d585"
-      SHORTENER = 'du-link.in'
+      api = "f9057bb95dd43be20792120da58cbf5552374397"
+      SHORTENER = 'tnlink.in'
       params = {'api': api, 'url': longurl}
-      duli= f'https://dulink.in/api'
+      duli= f'https://tnlink.in/api'
       get_url = requests.get(duli,params)
       get_url =  get_url.json()['shortenedUrl']
       print(get_url)
@@ -165,17 +165,17 @@ async def channel_receive_handler(bot, broadcast):
              XCaption = broadcast.caption   
         else:
               None 
-        XCaption = XCaption.replace("@Pulikesi_Links - ", "")
-        XCaption = XCaption.replace("@Pulikesi_Links ", "")
+        XCaption = XCaption.replace("@MROTTTamilOffl - ", "")
+        XCaption = XCaption.replace("@MROTTTamilOffl ", "")
         XCaption = XCaption.replace("HEVC", "#HEVC")
         XCaption = XCaption.rsplit('.', 1)[0]
         if XCaption.startswith('Sample') or 'from' in XCaption:
             XCaption = XCaption.replace("Sample video. 30s from", "#SampleVideo")
             XCaption = XCaption.rsplit('of', 1)[0]
             XCaption = XCaption.replace("30s from", "#SampleVideo")
-            XCaption = f"{XCaption}\n\n📥 JOIN : @Pulikesi_Links"
+            XCaption = f"{XCaption}\n\n📥 JOIN : @MROTTTamilOffl"
         else:
-            XCaption = f"{XCaption}\n\nFast Download Link 👇\n{online_link}\n\n📥 JOIN : @Pulikesi_Links"
+            XCaption = f"{XCaption}\n\nFast Download Link 👇\n{online_link}\n\n📥 JOIN : @MROTTTamilOffl"
         await bot.edit_message_caption(
             chat_id=broadcast.chat.id,
             message_id=broadcast.id,
