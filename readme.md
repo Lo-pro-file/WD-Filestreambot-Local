@@ -36,6 +36,7 @@
 <br>
 <details>
   <summary><b>Deploy on Heroku:</b></summary>
+ 
 
 
 1. Fork This Repo
@@ -50,6 +51,8 @@ Either you could locally host or deploy on [Heroku](https://heroku.com)
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy/)
 
 <br>
+
+<a target="_blank" href="https://app.koyeb.com/deploy?type=git&repository=github.com/RAFIQ-CLOUDZ/MR-Filestreambot/deploy-buttons&branch=master&name=tmafbot"><img alt="Deploy to Koyeb" src="https://binbashbanana.github.io/deploy-buttons/buttons/remade/koyeb.svg"></a>
 
 
 then goto the <a href="#mandatory-vars">variables tab</a> for more info on setting up environmental variables. </details>
